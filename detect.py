@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from Algorithm import *
+from NanoPIAlgorithm import *
 
 algo = Algorithm()
 dst_inliner, src_inliners = algo.run_nanopi(
