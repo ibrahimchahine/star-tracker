@@ -75,31 +75,23 @@ class Algorithm:
         image.save(img + "output.png")
         return stars
 
-    # def draw_results(self, img, stars, image_name):
-    #     """Method that draws the result of the match on the original imamge"""
-    #     print("Drawing results")
-    #     image = cv2.imread(img)
-    #     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    #     cv2.imwrite(image_name, gray)
-    #     image = np.array(Image.open(image_name).resize((600, 600)))
-    #     radius = 20
-    #     for i in range(len(stars)):
-    #         cv2.circle(
-    #             image, (int(stars[i][0]), int(stars[i][1])), radius, (255, 255, 255), 2
-    #         )
-    #         cv2.putText(
-    #             image,
-    #             str(i),
-    #             (int(stars[i][0] - 10), int(stars[i][1])),
-    #             cv2.FONT_HERSHEY_SIMPLEX,
-    #             0.5,
-    #             (255, 255, 255),
-    #             1,
-    #         )
-
-    #     cv2.imwrite(image_name, image)
-    #     cv2.waitKey(0)
-    #     cv2.destroyAllWindows()
+    def draw_results(self, img, stars, image_name):
+        """Method that draws the result of the match on the original imamge"""
+        print("Drawing results")
+        original_image = Image.open(img)
+        image = original_image.resize((600, 600))
+        image = image.convert("L")
+        draw = ImageDraw.Draw(image)
+        circle_radius = 10
+        for coord in stars:
+            draw.ellipse(
+                [
+                    (coord[0] - circle_radius, coord[1] - circle_radius),
+                    (coord[0] + circle_radius, coord[1] + circle_radius),
+                ],
+                outline="white",
+            )
+        image.save(image_name)
 
     def stars_list_to_array(self, stars):
         list = []
@@ -203,4 +195,6 @@ class Algorithm:
         dst_inliner, src_inliners = self.algorithm(
             stars1=stars1, stars2=stars2, num_iterations=1000, threshold=22
         )
+        self.draw_results(img=image1, stars=src_inliners, image_name="src.png")
+        self.draw_results(img=image2, stars=dst_inliner, image_name="dst.png")
         return dst_inliner, src_inliners
