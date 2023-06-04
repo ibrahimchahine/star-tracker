@@ -4,7 +4,7 @@ from scipy.spatial import KDTree
 import math
 from PIL import Image, ImageDraw
 from math import sqrt
-from AffineTransform import getAffineTransform
+from AffineTransform import getAffineTransform, dist_method
 
 
 class Algorithm:
@@ -20,9 +20,9 @@ class Algorithm:
 
     def get_angle(self, points):
         """Get angle of the lines of p1"""
-        p1 = math.dist(points[0], points[1])
-        p2 = math.dist(points[1], points[2])
-        p3 = math.dist(points[2], points[0])
+        p1 = dist_method(points[0], points[1])
+        p2 = dist_method(points[1], points[2])
+        p3 = dist_method(points[2], points[0])
         angle = math.acos((p1**2 + p2**2 - p3**2) / (2 * p1 * p2))
         return math.degrees(angle)
 

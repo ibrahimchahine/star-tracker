@@ -3,10 +3,10 @@ from math import radians, sqrt, pow
 import numpy as np
 
 
-def dist(point1, point2):
+def dist_method(point1, point2):
     """Calculate the Euclidean distance between two points."""
     if len(point1) != len(point2):
-        raise ValueError("Points must have the same dimensions.")
+        raise ValueError("points must have the same dimensions.")
 
     squared_sum = 0
     for i in range(len(point1)):
