@@ -1,6 +1,18 @@
 from PIL import Image
-from math import radians
+from math import radians, sqrt, pow
 import numpy as np
+
+
+def dist(point1, point2):
+    """Calculate the Euclidean distance between two points."""
+    if len(point1) != len(point2):
+        raise ValueError("Points must have the same dimensions.")
+
+    squared_sum = 0
+    for i in range(len(point1)):
+        squared_sum += pow((point1[i] - point2[i]), 2)
+
+    return sqrt(squared_sum)
 
 
 def getAffineTransform(points1, points2):
