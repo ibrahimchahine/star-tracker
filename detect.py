@@ -12,7 +12,7 @@ for stars in database:
     data = [tuple(i) for i in stars]
     if len(data) > 2:
         dst_inliner, src_inliners = algo.run_nanopi_from_array(
-            image1="pics/fr1.jpg", stars=data
+            image1="pics/pic1.jpeg", stars=data
         )
         if len(dst_inliner) > max:
             final_src_inliers = src_inliners

@@ -35,6 +35,7 @@ class Algorithm:
         image = image.convert("L")
         threshold = 150
         binary_image = []
+
         for y in range(height):
             row = []
             for x in range(width):
@@ -74,7 +75,7 @@ class Algorithm:
                 ],
                 outline="white",
             )
-        image.save("temp/" + img[6:] + "output.png")
+        image.save("temp/" + "output.png")
         return stars
 
     def draw_results(self, img, stars, image_name):
@@ -204,13 +205,13 @@ class Algorithm:
     def run_nanopi_from_array(self, image1, stars):
         """Run the algorithm on one image and array on nanppi board."""
         print("Running Algorithm")
-
         stars1 = self.detect_nanopi(img=image1)
         src_stars = self.stars_list_to_array(stars1)
         print(src_stars)
-        print(stars)
-        dst_inliner, src_inliners = self.algorithm(
-            src_stars=src_stars, dst_stars=stars, num_iterations=1000, threshold=22
-        )
-        self.draw_results(img=image1, stars=src_inliners, image_name="src.png")
-        return dst_inliner, src_inliners
+        if len(src_stars) > 2:
+            dst_inliner, src_inliners = self.algorithm(
+                src_stars=src_stars, dst_stars=stars, num_iterations=1000, threshold=22
+            )
+            self.draw_results(img=image1, stars=src_inliners, image_name="src.png")
+            return dst_inliner, src_inliners
+        return [], []
