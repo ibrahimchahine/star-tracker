@@ -55,11 +55,25 @@ Src Stars            |  Dst Stars
 Our star tracker uses these python packages: cv2, numpy, scipy.spatial, PIL.
 If you want to run the code then look at the detect.py file for example
 ```sh
-import cv2
 import numpy as np
-from Algorithm import *
+from NanoPIAlgorithm import *
+
+filename = "database.npy"
+database = np.load(filename, allow_pickle=True)
 algo = Algorithm()
-dst_inliner, src_inliners = algo.run(image1='pics/fr1.jpg', image2='pics/fr2.jpg')
+max = 0
+final_src_inliers = []
+final_dst_inliers = []
+for stars in database:
+    data = [tuple(i) for i in stars]
+    if len(data) > 2:
+        dst_inliner, src_inliners = algo.run_nanopi_from_array(
+            image1="pics/pic1.jpeg", stars=data
+        )
+        if len(dst_inliner) > max:
+            final_src_inliers = src_inliners
+            final_dst_inliers = dst_inliner
+print(final_src_inliers, final_dst_inliers)
 ```
 
 ## Authors
