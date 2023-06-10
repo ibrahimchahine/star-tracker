@@ -6,6 +6,8 @@ from PIL import Image, ImageDraw
 from math import sqrt
 from AffineTransform import getAffineTransform, dist_method
 
+# from CalculateOrientation import calculate_orientation
+
 
 class Algorithm:
     def __init__(self):
@@ -195,6 +197,13 @@ class Algorithm:
         dst_inliner, src_inliners = self.algorithm(
             stars1=stars1, stars2=stars2, num_iterations=1000, threshold=22
         )
+        print(
+            "Stars detected in image1: "
+            + str(len(stars1))
+            + " image1: "
+            + str(len(stars2))
+        )
         self.draw_results(img=image1, stars=src_inliners, image_name="src.png")
         self.draw_results(img=image2, stars=dst_inliner, image_name="dst.png")
+
         return dst_inliner, src_inliners
