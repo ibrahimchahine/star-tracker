@@ -1,7 +1,11 @@
 # Star Tracker - By Ibrahim Chahine & Yehonatan Amosi
-This repository represents our star tracker implemention in python for exercise 1 in the _Intro To New Space course_.
+This repository represents our star tracker implemention in python for the final project in the _Intro To New Space course_.
 Below you will find the explanation about the algorithm that we used with the help of our instructor, and examples.
 
+## The NanoPi board
+In this project we made the algorithm for the nanopi board, we used the PILLOW library to detect stars, more details can be found [here](https://github.com/ibrahimchahine/star-tracker-ex1/NanoPIAlgorithm.py).
+
+## Algorithm
 ## Part 1
 In this part we will exaplain how we implemented the algorithm.
 After reaserch and help from our course instructor, we got decided to use this algorithm:
