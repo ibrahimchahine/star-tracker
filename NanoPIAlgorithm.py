@@ -12,14 +12,29 @@ class Algorithm:
         self.min_area = 1
         self.max_area = 1000
 
-    def find_nearest_neighbors(self, query_point, points, k=2):
-        """Find nearest neighbors of point and a set of points"""
+    def find_nearest_neighbors(self, point, points, k=2):
+        """
+        Find nearest neighbors of point and a set of points
+        Args:
+            point: The point to find nearest neighbors of.
+            points (array of points): The neighbors of the point.
+            k : The number of neighbors to find.
+
+        Returns: A list of points that represent nearest neighbors of the given point.
+        """
+
         kdtree = KDTree(points)
-        distances, indices = kdtree.query(query_point, k=k)
+        distances, indices = kdtree.query(point, k=k)
         return indices.tolist()
 
     def get_angle(self, points):
-        """Get angle of the lines of p1"""
+        """
+        Get angle of the lines of p1
+        Args:
+            points (array of points): A list of three points.
+
+        Returns: The angle of p1.
+        """
         p1 = dist_method(points[0], points[1])
         p2 = dist_method(points[1], points[2])
         p3 = dist_method(points[2], points[0])
@@ -27,6 +42,14 @@ class Algorithm:
         return math.degrees(angle)
 
     def detect_nanopi(self, img):
+        """
+        This method detects stars in a given image.
+
+        Args:
+            img (string): The path to the image.
+
+        Returns: A list of Object Star.
+        """
         original_image = Image.open(img)
         image = original_image.resize((600, 600))
         width, height = image.size
@@ -46,11 +69,16 @@ class Algorithm:
             for x in range(width):
                 if binary_image[y][x] == 1:
                     if (
+                        # Check if its the top is not a part of an object
                         (y > 0 and binary_image[y - 1][x] == 0)
+                        # Check if its the bittom is not a part of an object
                         or (y < height - 1 and binary_image[y + 1][x] == 0)
+                        # Check if its the left is not a part of an object
                         or (x > 0 and binary_image[y][x - 1] == 0)
+                        # Check if its the right is not a part of an object
                         or (x < width - 1 and binary_image[y][x + 1] == 0)
                     ):
+                        # Check if the star was already detected, because we are moving on pixels
                         if all(
                             sqrt((x - prev_x) ** 2 + (y - prev_y) ** 2) >= 15
                             for prev_x, prev_y in coordinates
@@ -62,7 +90,7 @@ class Algorithm:
             stars.append(Star(x=coord[0], y=coord[1], brightness=0, radius=0))
 
         draw = ImageDraw.Draw(image)
-        circle_radius = 20  # Adjust the radius as needed
+        circle_radius = 20
 
         for coord in coordinates:
             x, y = coord
@@ -77,7 +105,15 @@ class Algorithm:
         return stars
 
     def draw_results(self, img, stars, image_name):
-        """Method that draws the result of the match on the original imamge"""
+        """
+        Method that draws the result of the match on the original image
+
+        Args:
+            img (string): The path to the image.
+            stars (list): List of points to draw
+            image_name (string): The name of the output image
+
+        """
         print("Drawing results")
         original_image = Image.open(img)
         image = original_image.resize((600, 600))
@@ -95,6 +131,15 @@ class Algorithm:
         image.save(image_name)
 
     def stars_list_to_array(self, stars):
+        """
+        This method gets the list of stars as Star objects and converts them to list of point
+
+        Args:
+            stars (list of Star): The list of stars.
+
+        Returns: A list of point in 2D. Example: [(x0, y0), (x1, y1)]
+        """
+
         list = []
         for star in stars:
             list.append((star.x, star.y))
@@ -105,13 +150,30 @@ class Algorithm:
         return [stars[i] for i in index]
 
     def make_transform(self, src_stars, dst_stars):
+        """
+        This method return the transformation matrix from source and destination stars.
+        Args:
+            src_stars (list of points): The list of source stars.
+            dst_stars (list of points): The list of destination stars.
+
+        Returns: A tranform matrix
+        """
         src_pts = np.float32(src_stars)
         dst_pts = np.float32(dst_stars)
         matrix = getAffineTransform(src_pts, dst_pts)
         return matrix
 
     def check_inliers(self, src_pts_original, dst_pts_original, matrix, threshold):
-        """Check the inliers of src to dst"""
+        """
+        This method checks the inliers of src to dst
+        Args:
+            src_pts_original (list of points): The list of source stars.
+            dst_pts_original (list of points): The list of destination stars.
+            matrix : The tranform matrix.
+            threshold (number): The threshold.
+
+        Returns: src and dst inliers
+        """
         inliers = []
         src_inliers = []
         src_pts = list(src_pts_original)
@@ -137,7 +199,14 @@ class Algorithm:
         return inliers, src_inliers
 
     def get_sample_stars(self, sample_star, stars):
-        """Returns 2 nearest neighbors of the given sample star"""
+        """
+        This method returns 2 nearest neighbors of the given sample star
+        Args:
+            sample_star (list of points): sample star to find it's nearest neighbors.
+            stars (list of points): The potential nearest neighbors stars.
+
+        Returns: The 2 nearest neighbors of the given sample star.
+        """
         temp_list = list(stars)
         temp_list.remove(sample_star)
         nn = self.find_nearest_neighbors(sample_star, temp_list)
@@ -207,8 +276,32 @@ class Algorithm:
         src_stars = self.stars_list_to_array(stars1)
         if len(src_stars) > 2:
             dst_inliner, src_inliners = self.algorithm(
-                src_stars=src_stars, dst_stars=stars, num_iterations=1000, threshold=22
+                src_stars=stars, dst_stars=src_stars, num_iterations=1000, threshold=22
             )
-            self.draw_results(img=image1, stars=src_inliners, image_name="src.png")
+            self.draw_results(img=image1, stars=dst_inliner, image_name="src.png")
             return dst_inliner, src_inliners
         return [], []
+
+    def run_algo(self, filename, image):
+        """
+        This method if for running the algorithm on one image and array from the database.
+        Args:
+            filename (list of points): The name of the database file.
+            image (list of points): The captured image.
+
+        Returns: final_src_inliers, final_dst_inliers
+        """
+        database = np.load(filename, allow_pickle=True)
+        max = 0
+        final_src_inliers = []
+        final_dst_inliers = []
+        for stars in database:
+            data = [tuple(i) for i in stars]
+            if len(data) > 2:
+                dst_inliner, src_inliners = self.run_nanopi_from_array(
+                    image1=image, stars=data
+                )
+                if len(dst_inliner) > max:
+                    final_src_inliers = src_inliners
+                    final_dst_inliers = dst_inliner
+        return final_src_inliers, final_dst_inliers
