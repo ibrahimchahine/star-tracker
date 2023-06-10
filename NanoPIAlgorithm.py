@@ -6,8 +6,6 @@ from PIL import Image, ImageDraw
 from math import sqrt
 from AffineTransform import getAffineTransform, dist_method
 
-# from CalculateOrientation import calculate_orientation
-
 
 class Algorithm:
     def __init__(self):
