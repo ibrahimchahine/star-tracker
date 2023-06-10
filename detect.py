@@ -3,7 +3,6 @@ from NanoPIAlgorithm import *
 
 filename = "database.npy"
 database = np.load(filename, allow_pickle=True)
-print(database[0])
 algo = Algorithm()
 max = 0
 final_src_inliers = []
