@@ -3,7 +3,7 @@ This repository represents our star tracker implemention in python for the final
 Below you will find the explanation about the algorithm that we used with the help of our instructor, and examples.
 
 ## The NanoPi board
-In this project we made the algorithm for the nanopi board, we used the PILLOW library to detect stars, more details about the star detection can be found [here](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/NanoPIAlgorithm.py).
+In this project we made the algorithm for the nanopi board, we used the PILLOW library to detect stars, more details about the star detection can be found [here](https://github.com/ibrahimchahine/star-tracker/blob/main/NanoPIAlgorithm.py).
 
 ## Algorithm
 ## Part 1
@@ -44,7 +44,7 @@ If you want to run the yourself, then please see the _Installation and Run_ sect
 Here are some results we got, for more images check the results folder:
 Src Stars            |  Dst Stars
 :-------------------------:|:-------------------------:
-![src](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/results/src.png)  |  ![dst](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/results/dst.png)
+![src](https://github.com/ibrahimchahine/star-tracker/blob/main/results/src.png)  |  ![dst](https://github.com/ibrahimchahine/star-tracker/blob/main/results/dst.png)
 ![src](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/results/src2.png)  |  ![dst](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/results/dst2.png)
 ![src](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/results/src3.png)  |  ![dst](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/results/dst3.png)
 ![src](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/results/src9.png)  |  ![dst](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/results/dst9.png)
