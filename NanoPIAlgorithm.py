@@ -111,9 +111,7 @@ class Algorithm:
         matrix = getAffineTransform(src_pts, dst_pts)
         return matrix
 
-    def check_inliers(
-        self, src_pts_original, dst_pts_original, matrix, threshold, stars1, stars2
-    ):
+    def check_inliers(self, src_pts_original, dst_pts_original, matrix, threshold):
         """Check the inliers of src to dst"""
         inliers = []
         src_inliers = []
@@ -152,7 +150,7 @@ class Algorithm:
         samples_stars.append(n2)
         return samples_stars
 
-    def algorithm(self, stars1, stars2, num_iterations, threshold):
+    def algorithm(self, src_stars, dst_stars, num_iterations, threshold):
         """
         Get two sets of points as stars
         Make 1000 iterations:
@@ -165,8 +163,7 @@ class Algorithm:
         """
         inliers = []
         src_inliners = []
-        src_stars = self.stars_list_to_array(stars1)
-        dst_stars = self.stars_list_to_array(stars2)
+
         for i in range(num_iterations):
             src_sample = self.random_sample(stars=src_stars, num_samples=1)[0]
             src_samples_stars = self.get_sample_stars(
@@ -181,7 +178,7 @@ class Algorithm:
             if abs(angle - dst_angle) < 5:
                 matrix = self.make_transform(src_samples_stars, dst_samples_stars)
                 crr_inliners, crr_src_inliners = self.check_inliers(
-                    src_stars, dst_stars, matrix, threshold, stars1, stars2
+                    src_stars, dst_stars, matrix, threshold
                 )
                 if len(crr_inliners) >= len(inliers):
                     inliers = crr_inliners
@@ -192,18 +189,28 @@ class Algorithm:
     def run_nanopi(self, image1, image2):
         """Run the algorithm on two images on nanppi board."""
         print("Running Algorithm")
+
         stars1 = self.detect_nanopi(img=image1)
         stars2 = self.detect_nanopi(img=image2)
+        src_stars = self.stars_list_to_array(stars1)
+        dst_stars = self.stars_list_to_array(stars2)
         dst_inliner, src_inliners = self.algorithm(
-            stars1=stars1, stars2=stars2, num_iterations=1000, threshold=22
-        )
-        print(
-            "Stars detected in image1: "
-            + str(len(stars1))
-            + " image1: "
-            + str(len(stars2))
+            src_stars=src_stars, dst_stars=dst_stars, num_iterations=1000, threshold=22
         )
         self.draw_results(img=image1, stars=src_inliners, image_name="src.png")
         self.draw_results(img=image2, stars=dst_inliner, image_name="dst.png")
+        return dst_inliner, src_inliners
 
+    def run_nanopi_from_array(self, image1, stars):
+        """Run the algorithm on one image and array on nanppi board."""
+        print("Running Algorithm")
+
+        stars1 = self.detect_nanopi(img=image1)
+        src_stars = self.stars_list_to_array(stars1)
+        print(src_stars)
+        print(stars)
+        dst_inliner, src_inliners = self.algorithm(
+            src_stars=src_stars, dst_stars=stars, num_iterations=1000, threshold=22
+        )
+        self.draw_results(img=image1, stars=src_inliners, image_name="src.png")
         return dst_inliner, src_inliners
