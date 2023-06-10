@@ -207,7 +207,6 @@ class Algorithm:
         print("Running Algorithm")
         stars1 = self.detect_nanopi(img=image1)
         src_stars = self.stars_list_to_array(stars1)
-        print(src_stars)
         if len(src_stars) > 2:
             dst_inliner, src_inliners = self.algorithm(
                 src_stars=src_stars, dst_stars=stars, num_iterations=1000, threshold=22
