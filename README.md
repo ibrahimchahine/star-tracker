@@ -3,7 +3,7 @@ This repository represents our star tracker implemention in python for the final
 Below you will find the explanation about the algorithm that we used with the help of our instructor, and examples.
 
 ## The NanoPi board
-In this project we made the algorithm for the nanopi board, we used the PILLOW library to detect stars, more details can be found [here](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/NanoPIAlgorithm.py).
+In this project we made the algorithm for the nanopi board, we used the PILLOW library to detect stars, more details about the star detection can be found [here](https://github.com/ibrahimchahine/star-tracker-ex1/blob/main/NanoPIAlgorithm.py).
 
 ## Algorithm
 ## Part 1
