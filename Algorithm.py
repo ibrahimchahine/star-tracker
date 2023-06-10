@@ -114,7 +114,7 @@ class Algorithm:
             cv2.HOUGH_GRADIENT,
             1,
             20,
-            param1=240,
+            param1=220,
             param2=0.5,
             minRadius=2,
             maxRadius=7,
@@ -129,7 +129,7 @@ class Algorithm:
             stars.append(Star(x=x, y=y, brightness=brightness, radius=r))
         print(len(stars))
 
-        cv2.imwrite(image + "stars.png", img)
+        cv2.imwrite("temp/" + image[6:] + "stars.png", img)
         return stars
 
     def stars_list_to_array(self, stars):

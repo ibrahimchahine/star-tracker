@@ -63,7 +63,7 @@ class Algorithm:
             stars.append(Star(x=coord[0], y=coord[1], brightness=0, radius=0))
 
         draw = ImageDraw.Draw(image)
-        circle_radius = 10  # Adjust the radius as needed
+        circle_radius = 20  # Adjust the radius as needed
 
         for coord in coordinates:
             x, y = coord
@@ -74,7 +74,7 @@ class Algorithm:
                 ],
                 outline="white",
             )
-        image.save(img + "output.png")
+        image.save("temp/" + img[6:] + "output.png")
         return stars
 
     def draw_results(self, img, stars, image_name):
