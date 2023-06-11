@@ -7,14 +7,24 @@ In this project we made the algorithm for the nanopi board, we used the PILLOW l
 
 ## Algorithm
 Get two sets of points represented as stars. Perform 1000 iterations with the following steps:
+
     1. Randomly select a star from the source set.
+    
     2. Randomly select a star from the destination set.
+    
     3. Find the two nearest neighbors for each star and calculate the corresponding angles (a1 and a2).
+    
     4. If the absolute difference between a1 and a2 is less than the angle threshold, proceed with the following: 
+        
         a. Construct a transformation matrix using the six points from the images. 
+    
         b. Iterate through the points from src to dst and check if the transformed point is close enough to the dst point, using a threshold. 
+    
         c. If the transformed point satisfies the threshold condition, add it to the set of inliers.
+    
+    
     5. inliers If the new set of inliers is larger than the last one, update the best inliers.
+
 Return the set of inliers as the final result.
 
 
