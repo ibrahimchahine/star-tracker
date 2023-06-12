@@ -56,7 +56,10 @@ This is an example script that captures 10 images.
 
     Return the set of inliers as the final result.
 
+## Example using the Database
+In this part, you can see an example where we run the algorithm on an images and the database. In the vidoe you can see that every a couple of seconds in the stars that got detected get changed, this happens because the algorithm check on every array in the database for the best result.
 
+[Example run using the database](https://github.com/ibrahimchahine/star-tracker/assets/22155702/b5e1337e-67db-4031-ab32-99e9ea3f53ac)
 
 ## Examples with two images
 In this part we will list our results of the tests that we made.
@@ -85,8 +88,7 @@ algo = Algorithm()
 final_src_inliers, final_dst_inliers = algo.run_algo(filename=filename, image=image)
 print(final_src_inliers, final_dst_inliers)
 ```
-## Example using the Database
-[Example run using the database](https://github.com/ibrahimchahine/star-tracker/assets/22155702/b5e1337e-67db-4031-ab32-99e9ea3f53ac)
+
 
 ## Authors
 Ibrahim Chahine, Yehonatan Amosi
