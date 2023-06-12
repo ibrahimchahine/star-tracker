@@ -57,7 +57,7 @@ This is an example script that captures 10 images.
     Return the set of inliers as the final result.
 
 ## Example using the Database
-In this part, you can see an example where we run the algorithm on on image and the database. In the vidoe you can see that every a couple of seconds in the stars that got detected get changed, this happens because the algorithm check on every array in the database for the best result.
+In this part, you can see an example where we run the algorithm on on image and the database. In the vidoe you can see that every a couple of seconds the stars that got detected get changed, this happens because the algorithm check on every array in the database for the best result.
 
 [Example run using the database](https://github.com/ibrahimchahine/star-tracker/assets/22155702/b5e1337e-67db-4031-ab32-99e9ea3f53ac)
 
