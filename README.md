@@ -17,6 +17,23 @@ If you want to run this project on the nanopi board you need to make sure that y
     
    PIL: check for the version that is supported by python 3.4 [here](https://pillow.readthedocs.io/en/stable/installation.html).
 
+### Capturing images using the board camera
+After you turn on the camera please navigate to the [NanoPi](https://github.com/ibrahimchahine/star-tracker/tree/main/NanoPi) folder, make sure that you have a images folder if not make one. Then access the snapshot code and change the if to your ip
+```sh
+import os
+import time
+
+snapshot_call = "wget http://[Your Ip Address]:8080/?action=snapshot -O"
+n = 10
+
+for i in range(n):
+    call = os.system(snapshot_call + " images/" + str(i) + "_output.jpg")
+    time.sleep(5)
+
+print("Done")
+```
+This is an example script that captures 10 images.
+
 ## Algorithm
     Get two sets of points represented as stars. Perform 1000 iterations with the following steps:
 
