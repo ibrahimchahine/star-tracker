@@ -8,9 +8,17 @@ In this project we made the algorithm for the nanopi board, we used the PILLOW l
 ### How to run the camera?
 Go to the mjpg-streamer folder using cd mjpg-streamer, then type make clean all, and then you can type ./start.sh. After the camera is running you can access it in your browser by the you ip and port 8080. 
 
+### Libraries on the nanopi board?
+If you want to run this project on the nanopi board you need to make sure that you have the libraries. Please download these libraries using this:
+
+    Numpy: check for the version that is supported by python 3.4 here.
+    
+    Scipy.spatial: use pip install.
+    
+    PIL: check for the version that is supported by python 3.4 here.
 
 ## Algorithm
-Get two sets of points represented as stars. Perform 1000 iterations with the following steps:
+    Get two sets of points represented as stars. Perform 1000 iterations with the following steps:
 
     1. Randomly select a star from the source set.
     
@@ -29,7 +37,7 @@ Get two sets of points represented as stars. Perform 1000 iterations with the fo
     
     5. inliers If the new set of inliers is larger than the last one, update the best inliers.
 
-Return the set of inliers as the final result.
+    Return the set of inliers as the final result.
 
 
 
