@@ -6,7 +6,7 @@ Below you will find the explanation about the algorithm that we used with the he
 In this project we made the algorithm for the nanopi board, we used the PILLOW library to detect stars, more details about the star detection can be found [here](https://github.com/ibrahimchahine/star-tracker/blob/main/NanoPIAlgorithm.py).
 
 ### How to run the camera?
-Go to the mjpg-streamer folder using cd mjpg-streamer, then type make clean all, and then you can type ./start.sh. After the camera is running you can access it in your browser by the you ip and port 8080. 
+Go to the mjpg-streamer folder using cd mjpg-streamer, then type make clean all, and then you can type ./start.sh. After the camera is running you can access it in your browser by the you ip and port 8080. (Get the ip using ifconfig)
 
 ### Libraries on the nanopi board?
 If you want to run this project on the nanopi board you need to make sure that you have the libraries. Please download these libraries using this:
@@ -18,7 +18,7 @@ If you want to run this project on the nanopi board you need to make sure that y
    PIL: check for the version that is supported by python 3.4 [here](https://pillow.readthedocs.io/en/stable/installation.html).
 
 ### Capturing images using the board camera
-After you turn on the camera please navigate to the [NanoPi](https://github.com/ibrahimchahine/star-tracker/tree/main/NanoPi) folder, make sure that you have a images folder if not make one. Then access the snapshot code and change the if to your ip
+After you turn on the camera please navigate to the [NanoPi](https://github.com/ibrahimchahine/star-tracker/tree/main/NanoPi) folder, make sure that you have a images folder if not make one. Then access the snapshot code and change the if to your ip (Get the ip using ifconfig)
 ```sh
 import os
 import time
