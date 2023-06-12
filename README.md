@@ -5,6 +5,10 @@ Below you will find the explanation about the algorithm that we used with the he
 ## The NanoPi board
 In this project we made the algorithm for the nanopi board, we used the PILLOW library to detect stars, more details about the star detection can be found [here](https://github.com/ibrahimchahine/star-tracker/blob/main/NanoPIAlgorithm.py).
 
+### How to run the camera?
+Go to the mjpg-streamer folder using cd mjpg-streamer, then type make clean all, and then you can type ./start.sh. After the camera is running you can access it in your browser by the you ip and port 8080. 
+
+
 ## Algorithm
 Get two sets of points represented as stars. Perform 1000 iterations with the following steps:
 
