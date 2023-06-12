@@ -58,7 +58,7 @@ This is an example script that captures 10 images.
 
 
 
-## Example from two images
+## Examples with two images
 In this part we will list our results of the tests that we made.
 If you want to run the yourself, then please see the _Installation and Run_ section bellow, this way you can run you own tests.
 Here are some results we got, for more images check the results folder:
