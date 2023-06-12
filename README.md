@@ -11,11 +11,11 @@ Go to the mjpg-streamer folder using cd mjpg-streamer, then type make clean all,
 ### Libraries on the nanopi board?
 If you want to run this project on the nanopi board you need to make sure that you have the libraries. Please download these libraries using this:
 
-    Numpy: check for the version that is supported by python 3.4 [here](https://pypi.org/project/numpy/#history).
+   Numpy: check for the version that is supported by python 3.4 [here](https://pypi.org/project/numpy/#history).
     
-    Scipy.spatial: use pip install.
+   Scipy.spatial: use pip install.
     
-    PIL: check for the version that is supported by python 3.4 [here](https://pillow.readthedocs.io/en/stable/installation.html).
+   PIL: check for the version that is supported by python 3.4 [here](https://pillow.readthedocs.io/en/stable/installation.html).
 
 ## Algorithm
     Get two sets of points represented as stars. Perform 1000 iterations with the following steps:
