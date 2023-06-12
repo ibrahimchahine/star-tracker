@@ -5,7 +5,7 @@ import os
 
 dir = "pics"
 algo = Algorithm()
-filename = "database.npy"
+filename = "database_class_exmaple.npy"
 
 data = []
 for image in os.listdir(dir):

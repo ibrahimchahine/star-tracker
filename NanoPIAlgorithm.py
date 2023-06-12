@@ -5,6 +5,7 @@ import math
 from PIL import Image, ImageDraw
 from math import sqrt
 from AffineTransform import getAffineTransform, dist_method
+import numpy.lib.npyio as npyio
 
 
 class Algorithm:
@@ -269,10 +270,10 @@ class Algorithm:
         self.draw_results(img=image2, stars=dst_inliner, image_name="dst.png")
         return dst_inliner, src_inliners
 
-    def run_nanopi_from_array(self, image1, stars):
+    def run_nanopi_from_array(self, image1, stars, image_stars):
         """Run the algorithm on one image and array on nanppi board."""
         print("Running Algorithm")
-        stars1 = self.detect_nanopi(img=image1)
+        stars1 = image_stars
         src_stars = self.stars_list_to_array(stars1)
         if len(src_stars) > 2:
             dst_inliner, src_inliners = self.algorithm(
@@ -295,11 +296,12 @@ class Algorithm:
         max = 0
         final_src_inliers = []
         final_dst_inliers = []
+        image_stars = self.detect_nanopi(img=image)
         for stars in database:
             data = [tuple(i) for i in stars]
             if len(data) > 2:
                 dst_inliner, src_inliners = self.run_nanopi_from_array(
-                    image1=image, stars=data
+                    image1=image, stars=data, image_stars=image_stars
                 )
                 if len(dst_inliner) > max:
                     final_src_inliers = src_inliners
